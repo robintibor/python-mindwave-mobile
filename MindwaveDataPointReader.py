@@ -1,4 +1,4 @@
-from mindwaveMobileRawReader import MindwaveMobileRawReader
+from MindwaveMobileRawReader import MindwaveMobileRawReader
 import struct
 import collections
 
