@@ -1,7 +1,7 @@
 from MindwaveDataPoints import RawDataPoint, PoorSignalLevelDataPoint,\
     AttentionDataPoint, MeditationDataPoint, BlinkDataPoint, EEGPowersDataPoint
-EXTENDED_CODE_BYTE = 0x55
 
+EXTENDED_CODE_BYTE = 0x55
 
 class MindwavePacketPayloadParser:
     

@@ -8,8 +8,14 @@ class PoorSignalLevelDataPoint(DataPoint):
         DataPoint.__init__(self, dataValueBytes)
         self.amountOfNoise = self._dataValueBytes[0];
 
+    def headSetHasContactToSkin(self):
+        return self.amountOfNoise < 200;
+
     def __str__(self):
-        return "Poor Signal Level: " + str(self.amountOfNoise)
+        poorSignalLevelString = "Poor Signal Level: " + str(self.amountOfNoise)
+        if (not self.headSetHasContactToSkin()):
+            poorSignalLevelString += " - NO CONTACT TO SKIN"
+        return poorSignalLevelString
 
 class AttentionDataPoint(DataPoint):
     def __init__(self, _dataValueBytes):
