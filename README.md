@@ -4,6 +4,8 @@ Usage in python:
 
 ```python
 mindwaveDataPointReader = MindwaveDataPointReader()
-mindwaveDataPointReader.start() # connects to the mindwave mobile headset...
-dataPoint = mindwaveDataPointReader.readNextDataPoint() # reads one data point, data point types are specified in  MindwaveDataPoints.py'
+# connect to the mindwave mobile headset...
+mindwaveDataPointReader.start()
+# read one data point, data point types are specified in  MindwaveDataPoints.py'
+dataPoint = mindwaveDataPointReader.readNextDataPoint()
 ``` 
