@@ -1,0 +1,1 @@
+Some scripts to access the data streamed by the Neurosky Mindwave Mobile Headset over Bluetooth on Linux.
