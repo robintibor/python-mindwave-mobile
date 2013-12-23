@@ -1,7 +1,7 @@
 import time
 import bluetooth
-from MindwaveDataPoints import RawDataPoint
-from MindwaveDataPointReader import MindwaveDataPointReader
+from mindwavemobile.MindwaveDataPoints import RawDataPoint
+from mindwavemobile.MindwaveDataPointReader import MindwaveDataPointReader
 
 
 if __name__ == '__main__':
