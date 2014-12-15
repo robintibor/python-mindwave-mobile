@@ -2,8 +2,20 @@ Some scripts to access the data streamed by the **Neurosky Mindwave Mobile** Hea
 
 Requirements:
 * [PyBluez](http://code.google.com/p/pybluez/), see their [documentation](http://code.google.com/p/pybluez/wiki/Documentation) for installation instructions :)
+For Ubuntu, installation might work like this:
+```
+sudo apt-get install libbluetooth-dev
+pip install pybluez
+```
 
-Usage in python:
+
+If you want to install the library as a module, do:
+```
+python setup.py install
+```
+from the root folder of the repository.
+
+Afterwards, you can use it within python like this:
 
 ```python
 from mindwavemobile.MindwaveDataPointReader import MindwaveDataPointReader
