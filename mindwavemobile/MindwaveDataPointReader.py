@@ -11,7 +11,10 @@ class MindwaveDataPointReader:
 
     def start(self):
         self._mindwaveMobileRawReader.connectToMindWaveMobile()
-        
+
+    def isConnected(self):
+        return self._mindwaveMobileRawReader.isConnected()
+
     def readNextDataPoint(self):
         if (not self._moreDataPointsInQueue()):
             self._putNextDataPointsInQueue()

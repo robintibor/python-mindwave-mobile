@@ -1,5 +1,6 @@
 import bluetooth
 import time
+import textwrap
 
 
 class MindwaveMobileRawReader:
@@ -7,19 +8,48 @@ class MindwaveMobileRawReader:
     def __init__(self):
         self._buffer = [];
         self._bufferPosition = 0;
+        self._isConnected = False;
         
     def connectToMindWaveMobile(self):
-        # connecting via bluetooth RFCOMM
+        # First discover mindwave mobile address, then connect
+        # headset address of me was'9C:B7:0D:72:CD:02';
+        # not sure if it really can be different?
+        # now discovering address because of https://github.com/robintibor/python-mindwave-mobile/issues/4
+        mindwaveMobileAddress = self._findMindwaveMobileAddress()
+        if (mindwaveMobileAddress is not None):            
+            print ("Discovered Mindwave Mobile...")
+            self._connectToAddress(mindwaveMobileAddress)
+        else:
+            self._printErrorDiscoveryMessage()
+        
+    def _findMindwaveMobileAddress(self):
+        nearby_devices = bluetooth.discover_devices(lookup_names = True)
+        for address, name in nearby_devices:
+            if (name == "MindWave Mobile"):
+                return address
+        return None
+        
+    def _connectToAddress(self, mindwaveMobileAddress):
         self.mindwaveMobileSocket = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
-        mindwaveMobileAddress = '9C:B7:0D:72:CD:02';
-        while(True):
+        while (not self._isConnected):
             try:
-                self.mindwaveMobileSocket.connect((mindwaveMobileAddress, 1))
-                return;
+                self.mindwaveMobileSocket.connect(
+                    (mindwaveMobileAddress, 1))
+                self._isConnected = True
             except bluetooth.btcommon.BluetoothError as error:
                 print "Could not connect: ", error, "; Retrying in 5s..."
                 time.sleep(5) 
-    
+           
+
+    def isConnected(self):
+        return self._isConnected
+
+    def _printErrorDiscoveryMessage(self):
+         print(textwrap.dedent("""\
+                    Could not discover Mindwave Mobile. Please make sure the
+                    Mindwave Mobile device is in pairing mode and your computer
+                    has bluetooth enabled.""").replace("\n", " "))
+
     def _readMoreBytesIntoBuffer(self, amountOfBytes):
         newBytes = self._readBytesFromMindwaveMobile(amountOfBytes)
         self._buffer += newBytes
