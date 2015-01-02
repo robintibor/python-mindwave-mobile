@@ -4,8 +4,7 @@ Requirements:
 * [PyBluez](http://code.google.com/p/pybluez/), see their [documentation](http://code.google.com/p/pybluez/wiki/Documentation) for installation instructions :)
 For Ubuntu, installation might work like this:
 ```
-sudo apt-get install libbluetooth-dev
-pip install pybluez
+sudo apt-get install libbluetooth-dev python-bluetooth
 ```
 
 
