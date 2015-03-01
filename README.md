@@ -14,7 +14,7 @@ python setup.py install
 ```
 from the root folder of the repository.
 
-Afterwards, you can use it within python like this:
+Afterwards, you can use it within python like this, with the headset set in pairing mode (http://support.neurosky.com/kb/mindwave-mobile/how-do-i-put-the-mindwave-mobile-into-discovery-mode):
 
 ```python
 from mindwavemobile.MindwaveDataPointReader import MindwaveDataPointReader
