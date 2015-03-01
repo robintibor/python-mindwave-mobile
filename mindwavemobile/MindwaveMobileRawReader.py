@@ -5,20 +5,22 @@ import textwrap
 
 class MindwaveMobileRawReader:
     START_OF_PACKET_BYTE = 0xaa;
-    def __init__(self):
+    def __init__(self, address=None):
         self._buffer = [];
         self._bufferPosition = 0;
         self._isConnected = False;
+        self._mindwaveMobileAddress = address
         
     def connectToMindWaveMobile(self):
-        # First discover mindwave mobile address, then connect
-        # headset address of me was'9C:B7:0D:72:CD:02';
+        # First discover mindwave mobile address, then connect.
+        # Headset address of my headset was'9C:B7:0D:72:CD:02';
         # not sure if it really can be different?
         # now discovering address because of https://github.com/robintibor/python-mindwave-mobile/issues/4
-        mindwaveMobileAddress = self._findMindwaveMobileAddress()
-        if (mindwaveMobileAddress is not None):            
+        if (self._mindwaveMobileAddress is None):
+            self._mindwaveMobileAddress = self._findMindwaveMobileAddress()
+        if (self._mindwaveMobileAddress is not None):            
             print ("Discovered Mindwave Mobile...")
-            self._connectToAddress(mindwaveMobileAddress)
+            self._connectToAddress(self._mindwaveMobileAddress)
         else:
             self._printErrorDiscoveryMessage()
         
