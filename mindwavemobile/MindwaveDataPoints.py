@@ -2,7 +2,16 @@
 class DataPoint:
     def __init__(self, dataValueBytes):
         self._dataValueBytes = dataValueBytes
-                
+
+class UnknownDataPoint(DataPoint):
+    def __init__(self, dataValueBytes):
+        DataPoint.__init__(self, dataValueBytes)
+        self.unknownPoint = self._dataValueBytes[0]
+
+    def __str__(self):
+        retMsgString = "Unknown OpCode. Value: {}".format(self.unknownPoint)
+        return retMsgString
+
 class PoorSignalLevelDataPoint(DataPoint):
     def __init__(self, dataValueBytes):
         DataPoint.__init__(self, dataValueBytes)

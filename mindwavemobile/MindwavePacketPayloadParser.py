@@ -1,5 +1,6 @@
 from MindwaveDataPoints import RawDataPoint, PoorSignalLevelDataPoint,\
-    AttentionDataPoint, MeditationDataPoint, BlinkDataPoint, EEGPowersDataPoint
+    AttentionDataPoint, MeditationDataPoint, BlinkDataPoint, EEGPowersDataPoint,\
+    UnknownDataPoint
 
 EXTENDED_CODE_BYTE = 0x55
 
@@ -54,6 +55,11 @@ class MindwavePacketPayloadParser:
         return dataRowValueBytes
        
     def _extractLengthOfValueBytes(self, dataRowCode):
+        # If code is one of the mysterious initial code values
+        # return before the extended code check
+        if dataRowCode == 0xBA or dataRowCode == 0xBC:
+            return 1
+
         dataRowHasLengthByte = dataRowCode > 0x7f
         if (dataRowHasLengthByte):
             return self._getNextByte()
@@ -73,6 +79,8 @@ class MindwavePacketPayloadParser:
             return RawDataPoint(dataRowValueBytes)
         elif (dataRowCode == 0x83):
             return EEGPowersDataPoint(dataRowValueBytes)
+        elif (dataRowCode == 0xba or dataRowCode == 0xbc):
+            return UnknownDataPoint(dataRowValueBytes)
         else:
             assert False 
         
