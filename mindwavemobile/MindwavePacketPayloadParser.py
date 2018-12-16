@@ -1,4 +1,4 @@
-from MindwaveDataPoints import RawDataPoint, PoorSignalLevelDataPoint,\
+from .MindwaveDataPoints import RawDataPoint, PoorSignalLevelDataPoint,\
     AttentionDataPoint, MeditationDataPoint, BlinkDataPoint, EEGPowersDataPoint,\
     UnknownDataPoint
 

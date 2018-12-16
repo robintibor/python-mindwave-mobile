@@ -39,7 +39,7 @@ class MindwaveMobileRawReader:
                     (mindwaveMobileAddress, 1))
                 self._isConnected = True
             except bluetooth.btcommon.BluetoothError as error:
-                print "Could not connect: ", error, "; Retrying in 5s..."
+                print("Could not connect: ", error, "; Retrying in 5s...")
                 time.sleep(5) 
            
 
@@ -47,10 +47,10 @@ class MindwaveMobileRawReader:
         return self._isConnected
 
     def _printErrorDiscoveryMessage(self):
-         print(textwrap.dedent("""\
+         print((textwrap.dedent("""\
                     Could not discover Mindwave Mobile. Please make sure the
                     Mindwave Mobile device is in pairing mode and your computer
-                    has bluetooth enabled.""").replace("\n", " "))
+                    has bluetooth enabled.""").replace("\n", " ")))
 
     def _readMoreBytesIntoBuffer(self, amountOfBytes):
         newBytes = self._readBytesFromMindwaveMobile(amountOfBytes)
@@ -88,7 +88,7 @@ class MindwaveMobileRawReader:
         return self._getNextBytes(amountOfBytes);
     
     def _getNextBytes(self, amountOfBytes):
-        nextBytes = map(ord, self._buffer[self._bufferPosition: self._bufferPosition + amountOfBytes])
+        nextBytes = list(map(ord, self._buffer[self._bufferPosition: self._bufferPosition + amountOfBytes]))
         self._bufferPosition += amountOfBytes
         return nextBytes
     
