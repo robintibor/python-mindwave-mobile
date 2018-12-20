@@ -19,7 +19,7 @@ def connectToMindwaveHeadset():
         mindwaveMobileSocket.connect((mindwaveMobileAddress, 1))
         return;
     except bluetooth.btcommon.BluetoothError as error:
-        print "Could not connect: ", error
+        print("Could not connect: ", error)
 
 def closeConnectionToMindwaveHeadset():
     mindwaveMobileSocket.close();
@@ -71,7 +71,7 @@ class ProtocolTest(unittest.TestCase):
         while (len(receivedChars) < numberOfBytes):
             receivedChars += mindwaveMobileSocket.recv(numberOfBytes - len(receivedChars))
         assert len(receivedChars) == numberOfBytes
-        return map(ord, receivedChars);
+        return list(map(ord, receivedChars));
     
     def _checkPacket(self, payloadBytes, checkSum):
         self._checkCheckSum(payloadBytes, checkSum)

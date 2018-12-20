@@ -1,8 +1,8 @@
-from MindwaveMobileRawReader import MindwaveMobileRawReader
+from .MindwaveMobileRawReader import MindwaveMobileRawReader
 import struct
 import collections
 
-from MindwavePacketPayloadParser import MindwavePacketPayloadParser
+from .MindwavePacketPayloadParser import MindwavePacketPayloadParser
 
 class MindwaveDataPointReader:
     def __init__(self, address=None):
@@ -34,7 +34,7 @@ class MindwaveDataPointReader:
         self._goToStartOfNextPacket()
         payloadBytes, checkSum = self._readOnePacket()
         if (not self._checkSumIsOk(payloadBytes, checkSum)):
-            print "checksum of packet was not correct, discarding packet..."
+            print("checksum of packet was not correct, discarding packet...")
             return self._readDataPointsFromOnePacket();
         else:
             dataPoints = self._readDataPointsFromPayload(payloadBytes)

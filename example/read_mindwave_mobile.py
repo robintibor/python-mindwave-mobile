@@ -11,9 +11,9 @@ if __name__ == '__main__':
         while(True):
             dataPoint = mindwaveDataPointReader.readNextDataPoint()
             if (not dataPoint.__class__ is RawDataPoint):
-                print dataPoint
+                print(dataPoint)
     else:
-        print(textwrap.dedent("""\
+        print((textwrap.dedent("""\
             Exiting because the program could not connect
-            to the Mindwave Mobile device.""").replace("\n", " "))
+            to the Mindwave Mobile device.""").replace("\n", " ")))
         

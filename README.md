@@ -23,5 +23,5 @@ mindwaveDataPointReader = MindwaveDataPointReader()
 mindwaveDataPointReader.start()
 # read one data point, data point types are specified in  MindwaveDataPoints.py'
 dataPoint = mindwaveDataPointReader.readNextDataPoint()
-print dataPoint
+print(dataPoint)
 ``` 
