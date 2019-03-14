@@ -58,7 +58,9 @@ class MindwaveMobileRawReader:
     
     def _readBytesFromMindwaveMobile(self, amountOfBytes):
         missingBytes = amountOfBytes
-        receivedBytes = ""
+        # receivedBytes = ""  #py2
+        receivedBytes = b''   #py3
+        
         # Sometimes the socket will not send all the requested bytes
         # on the first request, therefore a loop is necessary...
         while(missingBytes > 0):
@@ -79,7 +81,8 @@ class MindwaveMobileRawReader:
             self._readMoreBytesIntoBuffer(amountOfBytes)
     
     def _getNextByte(self):
-        nextByte = ord(self._buffer[self._bufferPosition]);
+        # nextByte = ord(self._buffer[self._bufferPosition]) #py2
+        nextByte = self._buffer[self._bufferPosition]   #py3
         self._bufferPosition += 1;
         return nextByte;
 
@@ -88,7 +91,8 @@ class MindwaveMobileRawReader:
         return self._getNextBytes(amountOfBytes);
     
     def _getNextBytes(self, amountOfBytes):
-        nextBytes = list(map(ord, self._buffer[self._bufferPosition: self._bufferPosition + amountOfBytes]))
+        # nextBytes = list(map(ord, self._buffer[self._bufferPosition: self._bufferPosition + amountOfBytes])) #py2
+        nextBytes = list(self._buffer[self._bufferPosition: self._bufferPosition + amountOfBytes]) #py3
         self._bufferPosition += amountOfBytes
         return nextBytes
     
